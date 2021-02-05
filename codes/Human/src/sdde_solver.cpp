@@ -51,7 +51,7 @@ void SDDE::set_params(
 
     this->dtmax = dtmax;
     this->noiseAmplitude = noiseAmplitude;
-    dtmin = 1.e-3;
+    dtmin = 5e-4;
     dt0 = 1.e-2;
     RelTol = 1.e-5;
     AbsTol = 1.e-8;
@@ -231,8 +231,8 @@ void SDDE::integrate(const int numEnsembles)
         { //if it is accepted
             for (int i = 0; i < N; i++)
             {
-                // pt_x_ar[i].push_back(TEMPx[i] + sqrt(dt) * (noiseAmplitude * RANDOM_GAUSS(1.0)));
-                pt_x_ar[i].push_back(TEMPx[i]); //!!!! noise term removed
+                pt_x_ar[i].push_back(TEMPx[i] + sqrt(dt) * (noiseAmplitude * RANDOM_GAUSS(1.0)));
+                // pt_x_ar[i].push_back(TEMPx[i]); //!!!! noise term removed
                 pt_x_Var[i].push_back(k4[i]);
             }
             k1 = k4;

@@ -43,16 +43,21 @@ def batch_run():
                                           network_name,
                                           xyz_centers_name), usecols=(1, 2, 3))
             # delay_mat = euclidean_distances(xyz) / VELOCITY
-            delay_mat = np.loadtxt(os.path.join(directory,
-                                                study_name,
-                                                network_name,
-                                                distancemat_name))/VELOCITY
-
             adj = np.loadtxt(os.path.join(directory,
                                           study_name,
                                           network_name,
                                           connectmat_name))
             adj = adj/np.max(adj)
+            N = adj.shape[0]
+
+            if USE_FIXED_DELAY[0]:
+                delay_mat = (np.ones((N, N), dtype=int) -
+                             np.diag([1] * N)) * USE_FIXED_DELAY[1]
+            else:
+                delay_mat = np.loadtxt(os.path.join(directory,
+                                                    study_name,
+                                                    network_name,
+                                                    distancemat_name))/VELOCITY
             ncluster = lib.communities_to_file(
                 adj, "walktrap",
                 filename1=join("../data/text/networks", community_name_l1),
@@ -64,8 +69,7 @@ def batch_run():
                 adj = lib.binarize(adj, 1e-8)
             np.savetxt(join("../data/text/networks", connectmat_name),
                        adj, fmt="%18.9f")
-            N = adj.shape[0]
-
+            
             for g in G:
                 for m in muMean:
                     arg.append([N,

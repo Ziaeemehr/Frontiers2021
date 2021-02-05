@@ -5,6 +5,7 @@ import numpy as np
 from sys import exit
 import pandas as pd
 from os.path import join
+from scipy.spatial.distance import pdist
 from config import *
 # ---------------------------------------------------------------------- #
 
@@ -43,6 +44,32 @@ def calculate_ave_correlation(sub_name, N):
             np.savez("../data/npz/{:s}".format(subnamefr), cor=cor)
 
 
+def calculate_distances(sub_name, g, metric='euclidean'):
+
+    adj = np.loadtxt(connectmat_name)
+    adj = adj.reshape(-1) / np.max(adj)
+    L = np.loadtxt(distancemat_name).reshape(-1)
+    indices = L > 1
+
+    distance = np.zeros((2, len(nu)))
+    for j in range(len(nu)):
+        dis = np.zeros(numEnsembles)
+        for ens in range(numEnsembles):
+            subname = str("%.6f-%.6f" % (g, muMean[j]))
+            cor = np.fromfile(
+                "text/c-"+subname+"-"+str(ens)+".bin",
+                dtype=float, count=-1)
+
+            dis[ens] = pdist(np.vstack((cor[indices], adj[indices])),
+                             metric=metric)
+            # dis[ens] = pdist(np.vstack((cor, adj)),
+            #                  metric=metric)
+        distance[0, j] = np.mean(dis)
+        distance[1, j] = np.std(dis)
+
+    np.savez("npz/Distances-{}".format(metric), nu=nu, d=distance)
+
+
 # ---------------------------------------------------------------------- #
 if __name__ == "__main__":
 
@@ -52,11 +79,9 @@ if __name__ == "__main__":
     for study_name in pathes:
         for network_name in pathes[study_name]:
             sub_name = "{0}_{1}".format(study_name, network_name)
-            delaymat_name = "{}_delaymat.txt".format(sub_name)
+            distancemat_name = "{}_distancemat.txt".format(sub_name)
             connectmat_name = "{}_connectmat.txt".format(sub_name)
             xyz_centers_name = "{}_region_xyz_centers.txt".format(sub_name)
-            community_name_l1 = "{}_comm_l1.txt".format(sub_name)
-            community_name_l2 = "{}_comm_l2.txt".format(sub_name)
 
             adj = np.loadtxt(os.path.join(directory,
                                           study_name,
@@ -64,3 +89,4 @@ if __name__ == "__main__":
                                           connectmat_name))
             N = adj.shape[0]
             calculate_ave_correlation(sub_name, N)
+            calculate_distances(sub_name, G[0])
