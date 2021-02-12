@@ -1,5 +1,5 @@
 -  This repository contains the codes for repuducing results and figures in the paper: 
--  Frequency-resolved functional connectivity: Role of delay and the strength of connections [biorxiv](https://www.biorxiv.org/content/10.1101/2020.09.10.291591v1) 
+-  Frequency-resolved functional connectivity: Role of delay and the strength of connections [under review of Frontires in neural circuits](https://www.researchgate.net/publication/344217594_Frequency-resolved_functional_connectivity_Role_of_delay_and_the_strength_of_connections) 
 -  Abolfazl Ziaeemehr [1], Alireza Valizadeh [1, 2]
    -  [1] Department of Physics, Institute of Advanced Studies in Basic Sciences (IASBS), Zanjan, Iran.
    -  [2] School of Biological Sciences, Institute for Research in Fundamental Sciences (IPM), Tehran, Iran.
