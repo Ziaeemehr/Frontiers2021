@@ -1,5 +1,5 @@
 -  This repository contains the codes for reproducing results and figures in the paper: 
--  Frequency-resolved functional connectivity: Role of delay and the strength of connections [Accepted by Frontiers in neural circuits](https://www.frontiersin.org/articles/10.3389/fncir.2021.608655/full#supplementary-material) 
+-  Frequency-resolved functional connectivity: Role of delay and the strength of connections [Published by Frontiers in neural circuits](https://doi.org/10.3389/fncir.2021.608655) 
 -  Abolfazl Ziaeemehr [1], Alireza Valizadeh [1, 2]
    -  [1] Department of Physics, Institute of Advanced Studies in Basic Sciences (IASBS), Zanjan, Iran.
    -  [2] School of Biological Sciences, Institute for Research in Fundamental Sciences (IPM), Tehran, Iran.
@@ -20,5 +20,19 @@ python3 pl.py
 # and plot figures using folders 2, 3 and 4.
 ```
 
+### How to cite:
+```
+@ARTICLE{10.3389/fncir.2021.608655,
+AUTHOR={Ziaeemehr, Abolfazl and Valizadeh, Alireza},   
+TITLE={Frequency-Resolved Functional Connectivity: Role of Delay and the Strength of Connections},      
+JOURNAL={Frontiers in Neural Circuits},      
+VOLUME={15},     
+PAGES={19},     
+YEAR={2021},      
+URL={https://www.frontiersin.org/article/10.3389/fncir.2021.608655},       
+DOI={10.3389/fncir.2021.608655},      
+ISSN={1662-5110}
+}
+```
 
 
